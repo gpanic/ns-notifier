@@ -1,4 +1,4 @@
-package com.nileshop.ns_notifier;
+package com.nileshop.notifier.android;
 
 import android.os.Bundle;
 import android.app.Activity;
