@@ -1,6 +1,7 @@
 package com.nileshop.notifier.ws.resources;
 
 import com.nileshop.notifier.ws.entities.Category;
+import com.nileshop.notifier.ws.entities.Product;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -12,8 +13,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-@Path("categories")
-public class CategoryResource {
+@Path("products")
+public class ProductResource {
     
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ns-notifier");
     
@@ -22,10 +23,10 @@ public class CategoryResource {
     @Produces("application/json; charset=UTF-8")
     public Response read(@PathParam("id") int id) {
         EntityManager em = emf.createEntityManager();
-        Category c = em.find(Category.class, id);
+        Product p = em.find(Product.class, id);
         em.close();
-        if (c != null) {
-            return Response.ok(c).build();
+        if (p != null) {
+            return Response.ok(p).build();
         } else {
             return Response.status(404).build();
         }
@@ -35,8 +36,8 @@ public class CategoryResource {
     @Produces("application/json; charset=UTF-8")
     public Response list() {
         EntityManager em = emf.createEntityManager();
-        TypedQuery<Category> query = em.createQuery("SELECT e FROM Category e", Category.class);
-        List<Category> c = query.getResultList();
+        TypedQuery<Product> query = em.createQuery("SELECT e FROM Product e", Product.class);
+        List<Product> c = query.getResultList();
         em.close();
         return Response.ok(c).build();
     }
