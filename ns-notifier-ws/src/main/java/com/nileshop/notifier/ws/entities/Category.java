@@ -6,11 +6,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Test {
+public class Category {
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
-    private String test;
+    private String name;
+    
+    public Category() {
+    }
+
+    public Category(String name) {
+    }
 
     public int getId() {
         return id;
@@ -20,12 +27,12 @@ public class Test {
         this.id = id;
     }
 
-    public String getTest() {
-        return test;
+    public String getName() {
+        return name;
     }
 
-    public void setTest(String test) {
-        this.test = test;
+    public void setName(String name) {
+        this.name = name;
     }
-    
+
 }

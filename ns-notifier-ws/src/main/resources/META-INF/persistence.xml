@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence">    
     <persistence-unit name="ns-notifier" transaction-type="RESOURCE_LOCAL">
-        <class>com.nileshop.notifier.ws.entities.Test</class>
+        <class>com.nileshop.notifier.ws.entities.Product</class>
+        <class>com.nileshop.notifier.ws.entities.Category</class>
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:/D:/ns-notifier.db" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:/D:/ns-notifier.sqlite" />
             <property name="javax.persistence.jdbc.user" value="scrumurai"/>
             <property name="javax.persistence.jdbc.password" value="ninja"/>
             <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC"/>
