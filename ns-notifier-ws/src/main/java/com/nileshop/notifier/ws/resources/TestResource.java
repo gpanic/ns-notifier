@@ -22,6 +22,8 @@ public class TestResource {
         p.setDescription("description");
         p.setManufacturer("manufacturer");
         p.setName("name");
+        p.setPrice(2.5);
+        p.setImage("image");
         p.setWeight(29.30);
         
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("ns-notifier");
