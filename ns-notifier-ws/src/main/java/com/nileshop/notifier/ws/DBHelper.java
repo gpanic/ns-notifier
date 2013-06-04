@@ -3,6 +3,7 @@ package com.nileshop.notifier.ws;
 import com.nileshop.notifier.ws.entities.Category;
 import com.nileshop.notifier.ws.entities.Product;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -53,7 +54,8 @@ public class DBHelper {
                 2.4,
                 "Lenovo",
                 categories.get(0),
-                "http://img22.mimovrste.com/23/36/422336_0.jpg"
+                "http://img22.mimovrste.com/23/36/422336_0.jpg",
+                new Date()
                 ));
         p.add(new Product("Monitor LED 24\" Dell UltraSharp U2412M",
                 259.00,
@@ -61,7 +63,8 @@ public class DBHelper {
                 4.2,
                 "Dell",
                 categories.get(0),
-                "http://img11.mimovrste.com/38/99/243899_0.jpg"
+                "http://img11.mimovrste.com/38/99/243899_0.jpg",
+                new Date()
                 ));
         p.add(new Product("LED LCD TV sprejemnik Samsung 46F6100 (3D)",
                 789.00,
@@ -69,7 +72,8 @@ public class DBHelper {
                 2.4,
                 "Samsung",
                 categories.get(1),
-                "http://img22.mimovrste.com/5/16/420516_0.jpg"
+                "http://img22.mimovrste.com/5/16/420516_0.jpg",
+                new Date()
                 ));
         p.add(new Product("A Dance With Dragons: Part 1 Dreams and Dust (A Song of Ice and Fire, Book 5)",
                 5.67,
@@ -77,7 +81,8 @@ public class DBHelper {
                 1.1,
                 "Harper Voyager",
                 categories.get(2),
-                "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRhcu-PP2UYgOKElfyXSPktASQgQ6xKAwCkiq6SFwgZQFCMTu-lHA"
+                "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRhcu-PP2UYgOKElfyXSPktASQgQ6xKAwCkiq6SFwgZQFCMTu-lHA",
+                new Date()
                 ));
         p.add(new Product("Samsung Galaxy S III 16GB",
                 690,
@@ -85,7 +90,8 @@ public class DBHelper {
                 0.3,
                 "Samsung",
                 categories.get(3),
-                "http://img11.mimovrste.com/16/97/311697_0.jpg"
+                "http://img11.mimovrste.com/16/97/311697_0.jpg",
+                new Date()
                 ));
         p.add(new Product("GSM telefon Samsung Galaxy S4, Black Mist",
                 688.49,
@@ -93,7 +99,8 @@ public class DBHelper {
                 0.3,
                 "Samsung",
                 categories.get(3),
-                "http://img22.mimovrste.com/62/6/426206_0.jpg"
+                "http://img22.mimovrste.com/62/6/426206_0.jpg",
+                new Date()
                 ));
         p.add(new Product("Procesor Intel Core i7 3770K 3,5 GHz Box, 1155 (BX80637I73770KSR0PL)",
                 342.39,
@@ -101,7 +108,8 @@ public class DBHelper {
                 0.8,
                 "Intel",
                 categories.get(0),
-                "http://img11.mimovrste.com/95/49/319549_0.jpg"
+                "http://img11.mimovrste.com/95/49/319549_0.jpg",
+                new Date()
                 ));
         p.add(new Product("2,5\" SSD disk Samsung 840 TLC Basic 120 GB, SATA III (MZ-7TD120BW)",
                 94.58,
@@ -109,7 +117,8 @@ public class DBHelper {
                 0.3,
                 "Samsung",
                 categories.get(0),
-                "http://img11.mimovrste.com/98/27/379827_0.jpg"
+                "http://img11.mimovrste.com/98/27/379827_0.jpg",
+                new Date()
                 ));
         p.add(new Product("Slušalke Logitech G430 (981-000537)",
                 74.02,
@@ -117,7 +126,8 @@ public class DBHelper {
                 1.2,
                 "Logitech",
                 categories.get(1),
-                "http://img22.mimovrste.com/89/32/428932_0.jpg"
+                "http://img22.mimovrste.com/89/32/428932_0.jpg",
+                new Date()
                 ));
         return p;
     }

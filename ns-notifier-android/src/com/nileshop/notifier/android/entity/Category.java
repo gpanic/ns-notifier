@@ -1,4 +1,4 @@
-package com.nileshop.notifier.android.entities;
+package com.nileshop.notifier.android.entity;
 
 public class Category {
 

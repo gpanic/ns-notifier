@@ -1,4 +1,6 @@
-package com.nileshop.notifier.android.entities;
+package com.nileshop.notifier.android.entity;
+
+import java.util.Date;
 
 public class Product {
 	
@@ -9,11 +11,12 @@ public class Product {
     private double weight;
     private String manufacturer;
     private String image;
+    private Date added;
     
     public Product() {
     }
 
-    public Product(String name, double price, String description, double weight, String manufacturer, Category category, String image) {
+    public Product(String name, double price, String description, double weight, String manufacturer, Category category, String image, Date added) {
         this.name = name;
         this.price = price;
         this.description = description;
@@ -21,6 +24,7 @@ public class Product {
         this.manufacturer = manufacturer;
         this.category = category;
         this.image = image;
+        this.added = added;
     }
     
     private Category category;
@@ -88,6 +92,14 @@ public class Product {
     public void setPrice(double price) {
         this.price = price;
     }
+
+	public Date getAdded() {
+		return added;
+	}
+
+	public void setAdded(Date added) {
+		this.added = added;
+	}
 
 	@Override
 	public String toString() {

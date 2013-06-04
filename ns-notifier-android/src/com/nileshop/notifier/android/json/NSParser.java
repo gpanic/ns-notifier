@@ -1,14 +1,17 @@
 package com.nileshop.notifier.android.json;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.nileshop.notifier.android.entities.Category;
-import com.nileshop.notifier.android.entities.Product;
+import android.util.Log;
+
+import com.nileshop.notifier.android.entity.Category;
+import com.nileshop.notifier.android.entity.Product;
 
 public class NSParser {
 	
@@ -39,6 +42,7 @@ public class NSParser {
 			product.setName(productJSON.getString("name"));
 			product.setPrice(productJSON.getDouble("price"));
 			product.setWeight(productJSON.getDouble("weight"));
+			product.setAdded(new Date(productJSON.getLong("added")));
 			return product;
 		} catch (JSONException e) {
 			e.printStackTrace();
