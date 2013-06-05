@@ -19,7 +19,7 @@ public class MainActivity extends Activity {
 	
 	private static final String TAG = "MainActivity";
 	private static final int INTENT_ID = 287892;
-	private static final int TIMER_INTERVAL = 5;
+	private static final int TIMER_INTERVAL = 60;
 	
 	private ToggleButton tb;
 

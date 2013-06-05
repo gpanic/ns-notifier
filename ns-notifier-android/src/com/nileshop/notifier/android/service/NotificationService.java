@@ -2,18 +2,29 @@ package com.nileshop.notifier.android.service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.List;
 
+import com.nileshop.notifier.android.MainActivity;
+import com.nileshop.notifier.android.R;
 import com.nileshop.notifier.android.entity.Product;
 import com.nileshop.notifier.android.json.NSParser;
 
 import android.app.IntentService;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 public class NotificationService extends IntentService {
@@ -66,6 +77,10 @@ public class NotificationService extends IntentService {
 					String json = sb.toString();
 					List<Product> products = NSParser.productsFromJSON(json);
 					Log.v(TAG, products.get(0).getAdded().toString());
+					DecimalFormat df = new DecimalFormat("0.00");
+					Bitmap image = getBitmapFromURL(products.get(0).getImage());
+					Bitmap scaledImage = Bitmap.createScaledBitmap(image, 100, 100, false);
+					createNotification(products.get(0).getName(), df.format(products.get(0).getPrice())+'\u20ac', scaledImage);
 				}
 				Log.v(TAG, "HERE2");
 			} catch (MalformedURLException e) {
@@ -75,6 +90,41 @@ public class NotificationService extends IntentService {
 			}
 			return "FINISHED";
 		}
+		
+		private Bitmap getBitmapFromURL(String src) {
+			try {
+				URL url = new URL(src);
+				HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+				connection.setDoInput(true);
+				connection.connect();
+				InputStream input = connection.getInputStream();
+				Bitmap bitmap = BitmapFactory.decodeStream(input);
+				return bitmap;
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+	}
+	
+	private void createNotification(String title, String text, Bitmap image) {
+		NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext())
+		.setSmallIcon(R.drawable.ic_stat_notification)
+		.setLargeIcon(image)
+		.setContentTitle(title)
+		.setContentText(text)
+		.setAutoCancel(true);
+		
+		Intent intent = new Intent(this, MainActivity.class);
+		TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+		stackBuilder.addParentStack(MainActivity.class);
+		stackBuilder.addNextIntent(intent);
+		PendingIntent pintent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+		builder.setContentIntent(pintent);
+		NotificationManager manager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+		manager.notify(15, builder.build());
 	}
 
 }
