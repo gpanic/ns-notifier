@@ -13,38 +13,31 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.ToggleButton;
 
 public class MainActivity extends Activity {
 	
 	private static final String TAG = "MainActivity";
+	private static final int INTENT_ID = 287892;
+	private static final int TIMER_INTERVAL = 5;
+	
+	private ToggleButton tb;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Log.v(TAG, "onCreate");
-		Button startServiceButton = (Button) findViewById(R.id.startServiceButton);
-		startServiceButton.setOnClickListener(new OnClickListener() {
+		tb = (ToggleButton) findViewById(R.id.serviceToggleButton);
+		tb.setChecked(isNotificationServiceRunning());
+		tb.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.v(TAG, "startServiceButton");
-				Calendar c = Calendar.getInstance();
-				Intent intent = new Intent(v.getContext(), NotificationService.class);
-				PendingIntent pintent = PendingIntent.getService(v.getContext(), 0, intent, 0);
-				AlarmManager alarm = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-				alarm.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), 5*1000, pintent);
-			}
-		});
-		Button stopServiceButton = (Button) findViewById(R.id.stopServiceButton);
-		stopServiceButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Log.v(TAG, "stopServiceButton");
-				Intent intent = new Intent(v.getContext(), NotificationService.class);
-				PendingIntent pintent = PendingIntent.getService(v.getContext(), 0, intent, 0);
-				AlarmManager alarm = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-				alarm.cancel(pintent);
+				if (tb.isChecked()) {
+					startNotificationService();
+				} else {
+					stopNotificationService();
+				}
 			}
 		});
 		Log.v(TAG, "onCreate finish");
@@ -55,6 +48,27 @@ public class MainActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+	private void startNotificationService() {
+		Calendar c = Calendar.getInstance();
+		Intent intent = new Intent(getApplicationContext(), NotificationService.class);
+		PendingIntent pintent = PendingIntent.getService(getApplicationContext(), INTENT_ID, intent, 0);
+		AlarmManager alarm = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+		alarm.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), TIMER_INTERVAL * 1000, pintent);
+		Settings.setServiceRunning(getApplicationContext(), true);
+	}
+	
+	private void stopNotificationService() {
+		Intent intent = new Intent(getApplicationContext(), NotificationService.class);
+		PendingIntent pintent = PendingIntent.getService(getApplicationContext(), INTENT_ID, intent, 0);
+		AlarmManager alarm = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+		alarm.cancel(pintent);
+		Settings.setServiceRunning(getApplicationContext(), false);
+	}
+	
+	private boolean isNotificationServiceRunning() {
+		return Settings.isServiceRunning(getApplicationContext());
 	}
 
 }

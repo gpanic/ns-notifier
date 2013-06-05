@@ -8,19 +8,22 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <Button
-        android:id="@+id/startServiceButton"
+    <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="Start Service" />
+        android:text="@string/service_status"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Button
-        android:id="@+id/stopServiceButton"
+    <ToggleButton
+        android:id="@+id/serviceToggleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/startServiceButton"
+        android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
-        android:text="Stop Service" />
+        android:textOff="Off"
+        android:textOn="On" />
 
 </RelativeLayout>

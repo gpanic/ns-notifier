@@ -27,17 +27,13 @@ public class NotificationService extends IntentService {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		Log.v(TAG, "onCreate");
 	}
 
 	@Override
 	protected void onHandleIntent(Intent arg0) {
-		Log.v(TAG, "onHandleIntent");
 		try {
 			new GetProductsTask().execute(new URL("http://10.0.2.2:7659/ns-notifier-ws/rest/products"));
-			Log.v(TAG, "executed");
 		} catch (MalformedURLException e) {
-			Log.v(TAG, "failed");
 			e.printStackTrace();
 		}
 	}
@@ -45,7 +41,6 @@ public class NotificationService extends IntentService {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		Log.v(TAG, "onDestroy");
 	}
 	
 	private class GetProductsTask extends AsyncTask<URL, Void, String> {

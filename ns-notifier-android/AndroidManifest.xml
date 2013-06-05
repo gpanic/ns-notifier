@@ -23,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".service.NotificationService" android:permission="android.permission.INTERNET"></service>
+        <service android:name=".service.NotificationService" android:permission="android.permission.INTERNET" android:process=":notifier"></service>
     </application>
 
 </manifest>
