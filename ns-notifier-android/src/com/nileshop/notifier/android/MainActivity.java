@@ -2,6 +2,7 @@ package com.nileshop.notifier.android;
 
 import java.util.Calendar;
 import com.nileshop.notifier.android.service.NotificationService;
+import com.nileshop.notifier.android.settings.Settings;
 
 import android.os.Bundle;
 import android.app.Activity;

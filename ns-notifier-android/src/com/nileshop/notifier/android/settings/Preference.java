@@ -1,4 +1,4 @@
-package com.nileshop.notifier.android;
+package com.nileshop.notifier.android.settings;
 
 public enum Preference {
 	SERVICE_RUNNING ("service_running");

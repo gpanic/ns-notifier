@@ -11,9 +11,11 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import com.nileshop.notifier.android.MainActivity;
+import com.nileshop.notifier.android.ProductViewActivity;
 import com.nileshop.notifier.android.R;
 import com.nileshop.notifier.android.entity.Product;
 import com.nileshop.notifier.android.json.NSParser;
+import com.nileshop.notifier.android.utility.BitmapHelper;
 
 import android.app.IntentService;
 import android.app.NotificationManager;
@@ -77,10 +79,9 @@ public class NotificationService extends IntentService {
 					String json = sb.toString();
 					List<Product> products = NSParser.productsFromJSON(json);
 					Log.v(TAG, products.get(0).getAdded().toString());
-					DecimalFormat df = new DecimalFormat("0.00");
-					Bitmap image = getBitmapFromURL(products.get(0).getImage());
+					Bitmap image = BitmapHelper.getBitmapFromURL(products.get(0).getImage());
 					Bitmap scaledImage = Bitmap.createScaledBitmap(image, 100, 100, false);
-					createNotification(products.get(0).getName(), df.format(products.get(0).getPrice())+'\u20ac', scaledImage);
+					createNotification(products.get(0), scaledImage);
 				}
 				Log.v(TAG, "HERE2");
 			} catch (MalformedURLException e) {
@@ -91,33 +92,21 @@ public class NotificationService extends IntentService {
 			return "FINISHED";
 		}
 		
-		private Bitmap getBitmapFromURL(String src) {
-			try {
-				URL url = new URL(src);
-				HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-				connection.setDoInput(true);
-				connection.connect();
-				InputStream input = connection.getInputStream();
-				Bitmap bitmap = BitmapFactory.decodeStream(input);
-				return bitmap;
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			return null;
-		}
 	}
 	
-	private void createNotification(String title, String text, Bitmap image) {
+	private void createNotification(Product product, Bitmap image) {
+		DecimalFormat df = new DecimalFormat("0.00");
+		
 		NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext())
 		.setSmallIcon(R.drawable.ic_stat_notification)
 		.setLargeIcon(image)
-		.setContentTitle(title)
-		.setContentText(text)
+		.setContentTitle(product.getName())
+		.setContentText(df.format(product.getPrice())+'\u20ac')
 		.setAutoCancel(true);
 		
-		Intent intent = new Intent(this, MainActivity.class);
+		Intent intent = new Intent(this, ProductViewActivity.class);
+		intent.putExtra("name", product.getName());
+		intent.putExtra("image", product.getImage());
 		TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
 		stackBuilder.addParentStack(MainActivity.class);
 		stackBuilder.addNextIntent(intent);

@@ -1,4 +1,4 @@
-package com.nileshop.notifier.android;
+package com.nileshop.notifier.android.settings;
 
 import android.content.Context;
 import android.content.SharedPreferences;
