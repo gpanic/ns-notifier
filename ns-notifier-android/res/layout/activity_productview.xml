@@ -1,24 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-
-    <TextView
-        android:id="@+id/productTitleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <ImageView
-        android:id="@+id/productImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/productTitleTextView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="17dp"
-        android:src="@drawable/ic_launcher" />
-
-</RelativeLayout>
+	<RelativeLayout android:layout_width="fill_parent"
+	    			android:layout_height="wrap_content" >
+	
+	    <TextView
+	        android:id="@+id/productTitleTextView"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentTop="true"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="30dp"
+	        android:padding="20dp"
+	        android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+	    <ImageView
+	        android:id="@+id/productImageView"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/productTitleTextView"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="17dp"
+	        android:src="@drawable/ic_launcher" />
+	
+	    <TextView
+	        android:id="@+id/productPriceTextView"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/productImageView"
+	        android:layout_centerHorizontal="true"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <TextView
+	        android:id="@+id/productDescriptionTextView"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:padding="20dp"
+	        android:layout_below="@+id/productPriceTextView"
+	        android:layout_centerHorizontal="true" />
+	
+	    <Button
+	        android:id="@+id/tweetButton"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/productDescriptionTextView"
+	        android:layout_centerHorizontal="true"
+	        android:text="@string/tweet_button" />
+	
+	</RelativeLayout>
+</ScrollView>

@@ -1,6 +1,10 @@
 package com.nileshop.notifier.android;
 
 import java.util.Calendar;
+
+import twitter4j.Twitter;
+import twitter4j.TwitterFactory;
+
 import com.nileshop.notifier.android.service.NotificationService;
 import com.nileshop.notifier.android.settings.Settings;
 
@@ -20,7 +24,7 @@ public class MainActivity extends Activity {
 	
 	private static final String TAG = "MainActivity";
 	private static final int INTENT_ID = 287892;
-	private static final int TIMER_INTERVAL = 60;
+	private static final int TIMER_INTERVAL = 3;
 	
 	private ToggleButton tb;
 
@@ -29,6 +33,16 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Log.v(TAG, "onCreate");
+		if (Settings.getTwitterConsumerKey(getApplicationContext()) == null || Settings.getTwitterConsumerSecret(getApplicationContext()) == null) {
+			Settings.setTwitterConsumerKey(getApplicationContext(), "9oSODV3h3afPfHhdhUyWQ");
+			Settings.setTwitterConsumerSecret(getApplicationContext(), "sZ1Ixlo0yKdXJ5GyTVw4dykztnlgtBERz7eL4kK6Q9U");
+		}
+		Twitter twitter = TwitterFactory.getSingleton();
+		try {
+			twitter.setOAuthConsumer("9oSODV3h3afPfHhdhUyWQ", "sZ1Ixlo0yKdXJ5GyTVw4dykztnlgtBERz7eL4kK6Q9U");
+		} catch (IllegalStateException e) {
+			Log.v(TAG, "OAuthConsumer already set");
+		}
 		tb = (ToggleButton) findViewById(R.id.serviceToggleButton);
 		tb.setChecked(isNotificationServiceRunning());
 		tb.setOnClickListener(new OnClickListener() {
@@ -49,6 +63,11 @@ public class MainActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+	@Override
+	public void onBackPressed() {
+		finish();
 	}
 	
 	private void startNotificationService() {
